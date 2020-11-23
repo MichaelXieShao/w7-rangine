@@ -68,8 +68,7 @@ class MiddlewareHandler implements RequestHandlerInterface {
 	 * @return static
 	 */
 	private function next() {
-		$clone = clone $this;
-		$clone->offset++;
-		return $clone;
+		$this->offset++;
+		return $this;
 	}
 }
