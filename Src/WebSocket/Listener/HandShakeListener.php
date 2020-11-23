@@ -74,7 +74,7 @@ class HandShakeListener extends ListenerAbstract {
 
 		$psr7Request->session = $this->getContainer()->clone(SessionInterface::class);
 		$psr7Request->session->start($psr7Request);
-		$response = $psr7Request->session->replenishResponse($response);
+		$psr7Request->session->replenishResponse($response);
 
 		try {
 			$localIps = swoole_get_local_ip();

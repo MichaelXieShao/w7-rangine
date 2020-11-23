@@ -74,9 +74,8 @@ class RequestDispatcher extends DispatcherAbstract {
 			//根据router配置，获取到匹配的controller信息
 			//获取到全部中间件数据，最后附加Http组件的特定的last中间件，用于处理调用Controller
 			$route = $this->getRoute($psr7Request);
+			$psr7Request->withAttribute('route', $route);
 			$this->getEventDispatcher()->dispatch(new RouteMatchedEvent($route, $psr7Request));
-			$psr7Request = $psr7Request->withAttribute('route', $route);
-			$this->getContext()->setRequest($psr7Request);
 
 			$middleWares = $this->middlewareMapping->getRouteMiddleWares($route);
 			$middlewareHandler = new MiddlewareHandler($middleWares);

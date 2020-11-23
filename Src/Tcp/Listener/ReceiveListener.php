@@ -38,16 +38,12 @@ class ReceiveListener extends ListenerAbstract {
 		/**
 		 * @var Psr7Request $psr7Request
 		 */
-		$psr7Request = $collector[0];
+		$psr7Request = clone $collector[0];
 		$psr7Request = $psr7Request->loadFromTcpData($data);
-
 		/**
 		 * @var Psr7Response $psr7Response
 		 */
-		$psr7Response = $collector[1];
-
-		$this->getContext()->setResponse($psr7Response);
-		$this->getContext()->setRequest($psr7Request);
+		$psr7Response = clone $collector[1];
 
 		$this->getEventDispatcher()->dispatch(ServerEvent::ON_USER_BEFORE_REQUEST, [$psr7Request, $psr7Response, ServerEnum::TYPE_TCP]);
 

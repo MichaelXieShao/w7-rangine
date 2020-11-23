@@ -29,10 +29,8 @@ abstract class TransformsRequestMiddleware extends MiddlewareAbstract {
 	 * @return void
 	 */
 	protected function trans($request) : ServerRequestInterface {
-		$request = $request->withQueryParams($this->transArray($request->getQueryParams()));
-		$request = $request->withParsedBody($this->transArray($request->getParsedBody()));
-
-		$this->getContext()->setRequest($request);
+		$request->withQueryParams($this->transArray($request->getQueryParams()));
+		$request->withParsedBody($this->transArray($request->getParsedBody()));
 
 		return $request;
 	}
